@@ -73,12 +73,12 @@ Modelos Mongo
 */
 
 /*
-Ruta index
+Ruta index, obtener todos los proyectos
 */
 
 app.get("/", async (req, res) => {
   console.log("Hello Tieso Shark!");
-  res.send("Hello Tieso Shark!");
+  res.send(Proyecto.find({}));
 });
 
 /*
@@ -149,6 +149,19 @@ app.put("/decision/:name", async (req, res) => {
   await proyectoAUpdatear.save();
 
   res.send("updated project: " + proyectoAUpdatear);
+});
+
+/*
+Ruta eliminar proyecto
+*/
+
+app.delete("/:name", async (req, res) => {
+  console.log("Hello Deleting Tieso Shark!");
+
+  const { name } = req.params;
+  await Proyecto.findOneAndRemove({ name: name });
+
+  res.send("Deleted project: " + name);
 });
 
 app.listen(port, () => console.log(`listening on http://localhost:${port}`));
