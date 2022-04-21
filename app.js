@@ -78,7 +78,8 @@ Ruta index, obtener todos los proyectos
 
 app.get("/", async (req, res) => {
   console.log("Hello Tieso Shark!");
-  res.send(Proyecto.find({}));
+  const data = await Proyecto.find({});
+  res.send(data);
 });
 
 /*
